@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projet de ML</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <!-- 🌙 HEADER -->
+  <header>
+  <div class="logo-container">
+    <a href="{% url 'index' %}" class="logo-link">
+      <svg class="brain-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3L16.5 5.5V10.5L12 13L7.5 10.5V5.5L12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M7.5 10.5L3 13V18L7.5 20.5L12 18L12 13" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-opacity="0.6"/>
+          <path d="M16.5 10.5L21 13V18L16.5 20.5L12 18" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-opacity="0.6"/>
+          <circle cx="12" cy="11" r="3" fill="currentColor" fill-opacity="0.2"/>
+          <circle cx="12" cy="11" r="1" fill="#fff"/>
+      </svg>
+      <span class="logo-text">Brainy<span class="highlight">AI</span></span>
+    </a>
+  </div>
+
+  <button class="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+  </button>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="{% url 'index' %}">Accueil</a></li>
+      <li><a href="{% url 'cleaning_form'%}">Nettoyage</a></li>
+      <li><a href="{% url 'add_info_form'%}">Améliorer notre projet</a></li>
+      <li><a href="{% url 'informations' %}">Nos informations</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+  

@@ -1,0 +1,1480 @@
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+  /* ========================================= */
+  /* 🌌 --- VARIABLES & CONFIGURATION --- */
+  /* ========================================= */
+  :root {
+    --bg-deep: #020617;       /* Noir profond (Fond global) */
+    --bg-nebula: #0f1623;     /* Fond secondaire (Cartes/Forms) */
+    --bg-surface: #1e293b;    /* Éléments de surface */
+    
+    --primary: #4ade80;       /* Vert Néon Principal */
+    --primary-glow: rgba(74, 222, 128, 0.5);
+    --accent: #22c55e;        /* Vert plus foncé pour dégradés */
+    
+    --glass-border: rgba(255, 255, 255, 0.08); /* Bordure subtile */
+    --glass-border-hover: rgba(74, 222, 128, 0.5);
+    
+    --text-main: #f8fafc;     /* Blanc cassé */
+    --text-muted: #94a3b8;    /* Gris bleuté */
+    
+    /* SHADOWS MODIFIÉES POUR PLUS DE PROFONDEUR */
+    --shadow-neon: 0 0 20px rgba(74, 222, 128, 0.15);
+    --shadow-card: 0 15px 35px -5px rgba(0, 0, 0, 0.6); /* Plus sombre et visible */
+    --shadow-header: 0 5px 30px rgba(0, 0, 0, 0.8);     /* Ombre forte pour le header */
+    --shadow-footer: 0 -5px 30px rgba(0, 0, 0, 0.8);    /* Ombre forte vers le haut */
+    
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* --- RESET & GLOBAL --- */
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-nebula);
+    /* Ajout d'un dégradé subtil pour la profondeur */
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(74, 222, 128, 0.03), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(34, 197, 94, 0.03), transparent 25%);
+    color: var(--text-main);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* --- CUSTOM SCROLLBAR (Pour une immersion totale) --- */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-deep); 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #334155; 
+    border-radius: 5px;
+    border: 2px solid var(--bg-deep);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+
+  /* Selection du texte */
+  ::selection {
+    background: var(--primary);
+    color: var(--bg-deep);
+  }
+
+  /* ========================================= */
+  /* 🧭 --- HEADER & NAVIGATION --- */
+  /* ========================================= */
+  header {
+    background: rgba(15, 22, 35, 0.9); /* Un peu plus opaque pour supporter l'ombre */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    
+    /* --- AJOUT SHADOW HEADER --- */
+    box-shadow: var(--shadow-header);
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    right: 0;
+    left: 0;
+    transition: all 0.3s ease;
+  }
+
+  /* Ligne lumineuse sous le header */
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0.5;
+  }
+
+  /* --- LOGO (Option B - Intégré) --- */
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: transform 0.3s var(--ease-spring);
+  }
+
+  .logo-link:hover {
+    transform: scale(1.05);
+  }
+
+  .brain-icon {
+    width: 38px; 
+    height: 38px;
+    color: var(--primary);
+    filter: drop-shadow(0 0 8px var(--primary-glow));
+    animation: quantum-float 5s infinite ease-in-out;
+  }
+
+  .logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .logo-text .highlight {
+    color: var(--primary);
+    text-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+  }
+
+  @keyframes quantum-float {
+    0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 5px var(--primary-glow)); }
+    50% { transform: translateY(-4px); filter: drop-shadow(0 0 15px var(--primary)); }
+  }
+
+  /* --- NAV LINKS --- */
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+  }
+
+  nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px var(--primary);
+  }
+
+  nav a:hover {
+    color: white;
+    text-shadow: 0 0 8px rgba(255,255,255,0.3);
+  }
+
+  nav a:hover::before {
+    width: 100%;
+  }
+
+  /* ========================================= */
+  /* 🏠 --- MAIN LAYOUT --- */
+  /* ========================================= */
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px 60px 20px; /* Plus d'espace en haut */
+    width: 100%;
+  }
+
+  /* ========================================= */
+  /* 📝 --- FORMULAIRE (Style Cyberpunk) --- */
+  /* ========================================= */
+  .form-container {
+    background: linear-gradient(160deg, var(--bg-nebula) 0%, #0b101a 100%);
+    border: 1px solid var(--glass-border);
+    padding: 50px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 480px;
+    
+    /* Shadow Formulaire */
+    box-shadow: var(--shadow-card);
+    
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 40px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .form-container:hover {
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(74, 222, 128, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Ligne supérieure brillante */
+  .form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    box-shadow: 0 1px 15px var(--primary);
+  }
+
+  .form-image {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .form-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(74, 222, 128, 0.5);
+    padding: 4px;
+    background: var(--bg-deep);
+    box-shadow: 0 0 30px rgba(74, 222, 128, 0.2);
+    transition: transform 0.4s var(--ease-spring);
+  }
+
+  .form-container:hover .form-image img {
+    transform: scale(1.05) rotate(3deg);
+    border-color: var(--primary);
+  }
+
+  .form-container h1 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(to right, #fff, #cbd5e1);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .form-container p {
+    color: var(--text-muted);
+    margin-bottom: 35px;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  /* --- CHAMPS DE SAISIE --- */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .form-group {
+    width: 100%;
+    max-width: 380px;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-left: 5px;
+  }
+
+  /* Inputs Standard */
+  input[type="number"],
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    background-color: rgba(12, 18, 27, 0.6);
+    color: white;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: rgba(8, 12, 18, 0.9);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.15), 0 0 15px rgba(74, 222, 128, 0.1);
+    transform: translateY(-1px);
+  }
+
+  input::placeholder {
+    color: rgba(148, 163, 184, 0.4);
+  }
+
+  /* --- RADIO BOUTONS --- */
+  .radio-group {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    max-width: 380px;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  .radio-group input[type="radio"] {
+    display: none;
+  }
+
+  .radio-btn {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    background-color: rgba(255,255,255,0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    color: var(--text-muted);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .radio-group input[type="radio"]:checked + .radio-btn {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-color: transparent;
+    color: var(--bg-deep);
+    font-weight: 700;
+    box-shadow: 0 5px 20px rgba(74, 222, 128, 0.4);
+  }
+
+  .radio-btn:hover:not(:active) {
+    background-color: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  /* --- BOUTON PRINCIPAL --- */
+  button {
+    width: 100%;
+    max-width: 380px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: var(--bg-deep);
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-spring);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin: 20px auto 0 auto;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Effet de brillance sur le bouton */
+  button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: 0.5s;
+  }
+
+  button:hover::after {
+    left: 100%;
+  }
+
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px -5px rgba(74, 222, 128, 0.6);
+    filter: brightness(1.1);
+  }
+
+  button:active {
+    transform: translateY(-1px);
+  }
+
+
+  /* --- SUPPRESSION DES FLÈCHES (SPIN BUTTONS) --- */
+
+  /* Pour Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  /* Pour Chrome, Safari, Edge, Opera */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* ========================================= */
+  /* 📂 --- UPLOAD CSV & DELIMITER --- */
+  /* ========================================= */
+  input[type="file"] {
+    display: block;
+    width: 100%;
+    border: 2px dashed var(--glass-border); 
+    border-radius: 14px;
+    background-color: rgba(12, 18, 27, 0.5);
+    color: var(--text-muted);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Animation "Fourmis qui marchent" au survol */
+  @keyframes dash-animation {
+    to { background-position: 20px 0; }
+  }
+
+  input[type="file"]:hover {
+    border-color: var(--primary);
+    background-color: rgba(74, 222, 128, 0.05);
+    color: white;
+    /* Effet visuel avancé */
+    background-image: linear-gradient(45deg, rgba(74,222,128,0.05) 25%, transparent 25%, transparent 50%, rgba(74,222,128,0.05) 50%, rgba(74,222,128,0.05) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    animation: dash-animation 1s linear infinite;
+    box-shadow: 0 0 20px rgba(74, 222, 128, 0.1);
+  }
+
+  input[type="file"]::file-selector-button {
+    background: rgba(30, 41, 59, 0.8);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-right: 15px;
+    transition: all 0.3s;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  input[type="file"]:hover::file-selector-button {
+    background: var(--primary);
+    color: var(--bg-deep);
+  }
+
+  /* Délimiteur Separator */
+  .form-group-separator {
+    position: relative;
+    border-top: 1px solid var(--glass-border); 
+    padding-top: 25px;
+    margin-top: 15px;
+    text-align: center;
+  }
+
+
+
+  #delimiter {
+    text-align: center;
+    width: 80px;
+    margin: 0 auto;
+    font-family: monospace;
+    font-size: 18px;
+    letter-spacing: 3px;
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(74, 222, 128, 0.05);
+  }
+
+  #csvUploadForm{
+    margin-bottom: 30px;
+  }
+
+  /* ========================================= */
+  /* 🎓 --- COURSE & PDF PAGE --- */
+  /* ========================================= */
+  .course-page {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: var(--bg-nebula); 
+    /* Subtle inner glow */
+    box-shadow: inset 0 0 0 1px var(--glass-border), var(--shadow-card);
+    padding: 60px;
+    border-radius: 24px;
+    position: relative;
+    animation: slideUp 0.6s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .course-header {
+    text-align: center;
+    margin-bottom: 50px;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 30px;
+  }
+
+  .course-header h1 {
+    font-size: 42px;
+    color: white;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  .course-section h2 {
+    color: var(--primary);
+    font-size: 24px;
+    margin: 40px 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .course-section h2::before {
+    content: '#';
+    opacity: 0.5;
+    color: white;
+  }
+
+  .course-section p {
+    color: #cbd5e1;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    text-align: justify;
+  }
+
+  .course-section ul {
+    color: #cbd5e1;
+    line-height: 1.8;
+    padding-left: 20px;
+  }
+
+  .course-section ul li {
+    margin-bottom: 10px;
+  }
+
+  .course-section ul li::marker {
+    color: var(--primary);
+  }
+
+  .pdf-viewer {
+    width: 100%;
+    height: 700px;
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    margin-top: 30px;
+    background-color: #1e293b;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  /* ========================================= */
+  /* 🖼️ --- PROJECTS / CARDS GRID --- */
+  /* ========================================= */
+  .projects-container, .team-page-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .projects-container h1, .team-page-container h1 {
+    font-size: 38px;
+    margin-bottom: 15px;
+    background: linear-gradient(120deg, #ffffff, var(--primary));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(74, 222, 128, 0.2);
+  }
+
+  .projects-container p, .team-page-container p {
+    color: var(--text-muted);
+    margin-bottom: 60px;
+    font-size: 16px;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .cards, .team-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  /* Style unifié des cartes (Project & Team) */
+  .card, .team-card {
+    background: linear-gradient(145deg, #131b29, #0f1521);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    transition: all 0.4s var(--ease-spring);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    
+    /* --- AJOUT SHADOW CARTES (Par défaut) --- */
+    box-shadow: var(--shadow-card);
+  }
+
+  .card::before, .team-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--primary);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover, .team-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: var(--glass-border-hover);
+    /* Ombre plus forte au survol */
+    box-shadow: 0 30px 60px -10px rgba(0,0,0,0.8), 0 0 25px rgba(74, 222, 128, 0.1);
+  }
+
+  .card:hover::before, .team-card:hover::before {
+    opacity: 1;
+  }
+
+  .card img, .team-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    filter: brightness(0.85);
+    transition: filter 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  }
+
+  .card:hover img, .team-card:hover img {
+    filter: brightness(1.1);
+  }
+
+  .card h2, .team-card h2 {
+    font-size: 22px;
+    color: white;
+    margin: 0 0 12px 0;
+    font-weight: 600;
+  }
+
+  .card-description, .team-card-description {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  /* Boutons Team */
+  .team-card-buttons {
+    display: flex;
+    gap: 12px;
+    padding-top: 25px;
+    margin-top: auto;
+  }
+
+  .team-card-buttons a {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .team-btn-contact {
+    background: linear-gradient(135deg, var(--primary), #22c55e);
+    color: #020617 !important;
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+  }
+
+  .team-btn-contact:hover {
+    box-shadow: 0 6px 20px rgba(74, 222, 128, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .team-btn-linkedin {
+    background: transparent;
+    border: 1px solid #334155;
+    color: #cbd5e1 !important;
+  }
+
+  .team-btn-linkedin:hover {
+    border-color: var(--primary);
+    color: var(--primary) !important;
+    background: rgba(74, 222, 128, 0.05);
+  }
+
+  /* ========================================= */
+  /* ✅ --- SUCCESS SECTION --- */
+  /* ========================================= */
+      .form-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          padding: 40px 20px;
+          background: var(--bg-nebula);
+          font-family: 'Poppins', sans-serif;
+      }
+
+      .dark-form {
+          width: 100%;
+          max-width: 500px;
+          background-color: #0f1623;
+          border: 1px solid #1e293b;
+          border-radius: 24px;
+          padding: 40px 30px;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+          color: white;
+          position: relative;
+          /* Animation d'apparition douce */
+          animation: fadeScale 0.5s ease-out;
+      }
+
+      @keyframes fadeScale {
+          from {
+              opacity: 0;
+              transform: scale(0.95);
+          }
+
+          to {
+              opacity: 1;
+              transform: scale(1);
+          }
+      }
+
+
+      #successSection {
+          display: block;
+          text-align: center;
+          padding: 60px 20px;
+      }
+
+      /* Cercle de l'animation */
+      .success-checkmark {
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 25px auto;
+          position: relative;
+      }
+
+      .check-icon {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          display: block;
+          stroke-width: 2;
+          stroke: #4ade80;
+          /* Vert Néon */
+          stroke-miterlimit: 10;
+          box-shadow: inset 0px 0px 0px #4ade80;
+          animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+      }
+
+      .check-circle {
+          stroke-dasharray: 166;
+          stroke-dashoffset: 166;
+          stroke-width: 2;
+          stroke-miterlimit: 10;
+          stroke: #4ade80;
+          fill: none;
+          animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+      }
+
+      .check-tick {
+          transform-origin: 50% 50%;
+          stroke-dasharray: 48;
+          stroke-dashoffset: 48;
+          animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+      }
+
+      /* Animation Keyframes */
+      @keyframes stroke {
+          100% {
+              stroke-dashoffset: 0;
+          }
+      }
+
+      @keyframes scale {
+
+          0%,
+          100% {
+              transform: none;
+          }
+
+          50% {
+              transform: scale3d(1.1, 1.1, 1);
+          }
+      }
+
+      @keyframes fill {
+          100% {
+              box-shadow: inset 0px 0px 0px 50px rgba(74, 222, 128, 0.1);
+          }
+      }
+
+      .success-title {
+          font-size: 28px;
+          color: white;
+          margin-bottom: 10px;
+          font-weight: 700;
+      }
+
+      .success-text {
+          color: #94a3b8;
+          font-size: 16px;
+          margin-bottom: 30px;
+      }
+
+      .reset-btn {
+          background: transparent;
+          border: 2px solid #334155;
+          color: #cbd5e1;
+          padding: 10px 25px;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: 0.3s;
+          width: fit-content;
+      }
+
+      .reset-btn:hover {
+          border-color: white;
+          color: white;
+          background: #1e293b;
+      }
+
+  /* ========================================= */
+  /* 🔳 --- MODAL (POPUP) --- */
+  /* ========================================= */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .modal-overlay.active {
+    opacity: 1; visibility: visible;
+  }
+
+  .modal-container {
+    background: #0f1623;
+    border: 1px solid var(--glass-border);
+    padding: 50px 40px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 480px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.4s var(--ease-spring);
+  }
+
+  .modal-overlay.active .modal-container {
+    transform: translateY(0) scale(1);
+  }
+
+  /* Ligne lumineuse Top Modal */
+  .modal-glow {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    box-shadow: 0 0 15px var(--primary);
+  }
+
+  .modal-icon {
+    font-size: 48px;
+    margin-bottom: 25px;
+    color: var(--primary);
+    filter: drop-shadow(0 0 15px rgba(74, 222, 128, 0.6));
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .modal-content h2 {
+    font-size: 28px;
+    color: white;
+    margin: 0 0 15px 0;
+  }
+
+  .modal-content p {
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 35px;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .btn-primary-glow{
+    width: 50%;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+  }
+
+  .btn-ghost:hover {
+    border-color: white;
+    color: white;
+    background: rgba(255,255,255,0.05);
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* ========================================= */
+  /* 👣 --- FOOTER --- */
+  /* ========================================= */
+  footer {
+    background-color: var(--bg-nebula);
+    border-top: 1px solid #1e293b;
+    color: #64748b;
+    text-align: center;
+    padding: 40px 0;
+    font-size: 14px;
+    margin-top: auto;
+    
+    /* --- AJOUT SHADOW FOOTER --- */
+    box-shadow: var(--shadow-footer);
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .form-container, .course-page {
+      padding: 30px 20px;
+      margin: 20px auto;
+    }
+    header {
+      padding: 15px 20px;
+    }
+    .modal-actions {
+      flex-direction: column-reverse;
+    }
+  }
+
+
+
+
+
+
+
+
+
+  /* ========================================= */
+  /* 💎 --- TITRES H1 UNIFIÉS & PREMIUM --- */
+  /* ========================================= */
+
+  /* 1. CONFIGURATION COMMUNE (Positionnement pour la barre) */
+  .projects-container h1, 
+  .team-page-container h1, 
+  .course-header h1,
+  .form-container h1 {
+    position: relative;       /* Indispensable pour la barre */
+    display: inline-block;    /* Indispensable pour centrer la barre */
+    text-align: center;
+    margin-bottom: 40px;      /* Espace unifié sous le titre */
+    cursor: default;
+  }
+
+  /* 2. STYLE DE LA BARRE NÉON (::after) - IDENTIQUE POUR TOUS */
+  .projects-container h1::after, 
+  .team-page-container h1::after, 
+  .course-header h1::after,
+  .form-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;            /* Distance du texte */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;              /* Largeur de départ */
+    height: 4px;              /* Épaisseur */
+    background: var(--primary);
+    border-radius: 10px;
+    /* Lueur Néon */
+    box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+    /* Animation fluide */
+    transition: width 0.4s ease;
+  }
+
+  /* 3. INTERACTION AU SURVOL (Pour TOUS) */
+  .projects-container h1:hover::after, 
+  .team-page-container h1:hover::after, 
+  .course-header h1:hover::after,
+  .form-container h1:hover::after {
+    width: 120px; /* La barre s'agrandit de la même façon partout */
+  }
+
+
+  /* --- STYLES SPÉCIFIQUES DU TEXTE --- */
+
+  /* A. Les Grands Titres (Animation Shine) */
+  .projects-container h1, 
+  .team-page-container h1, 
+  .course-header h1 {
+    font-size: 46px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    /* Dégradé animé fluide */
+    background: linear-gradient(
+      110deg, 
+      #ffffff 45%, 
+      var(--primary) 50%, 
+      #ffffff 55%
+    );
+    background-size: 250% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-smooth 4s linear infinite;
+    
+    filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.3));
+  }
+
+  /* B. Le Titre Formulaire (Plus compact, Blanc Pur, Pas de bug) */
+  .form-container h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    
+    /* On s'assure qu'il n'y a pas de conflit d'animation */
+    background: none;
+    -webkit-text-fill-color: initial;
+  }
+
+  /* Keyframes pour l'animation Shine */
+  @keyframes shine-smooth {
+    0% { background-position: 100% 0; }
+    100% { background-position: -150% 0; }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .projects-container h1, 
+    .team-page-container h1, 
+    .course-header h1 { font-size: 32px; }
+    .form-container h1 { font-size: 28px; }
+  }
+
+
+
+
+
+
+
+  /* ========================================= */
+  /* 📱 --- MOBILE RESPONSIVE ADAPTER --- */
+  /* ========================================= */
+
+  @media (max-width: 768px) {
+
+    /* 1. HEADER & NAVIGATION (Make it stack nicely) */
+    header {
+      flex-direction: column; /* Stack Logo on top of Nav */
+      padding: 15px 10px;
+      backdrop-filter: blur(15px); /* Stronger blur on mobile */
+      gap: 15px;
+    }
+
+    /* Adjust Logo size */
+    .logo-text {
+      font-size: 20px;
+    }
+    .brain-icon {
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Nav Links - Scroller or Stack */
+    nav ul {
+      width: 100%;
+      margin-top : 14px;
+      justify-content: center;
+      flex-wrap: wrap; /* Allow links to wrap to next line if needed */
+      gap: 15px;
+      padding-bottom: 5px;
+    }
+
+    nav a {
+      font-size: 12px; /* Slightly smaller text */
+      padding: 5px 8px;
+      background: rgba(255, 255, 255, 0.03); /* Subtle background for touch targets */
+      border-radius: 8px;
+    }
+    
+    /* Active state indicator for mobile */
+    nav a:active {
+      background: var(--primary);
+      color: var(--bg-deep);
+    }
+
+    /* 2. LAYOUT & SPACING */
+    main {
+      padding: 130px 15px 40px 15px; /* Adjust top padding because header is taller */
+    }
+
+    .projects-container, 
+    .team-page-container {
+      padding: 0 10px;
+    }
+
+    /* 3. TYPOGRAPHY (Scaling down the huge titles) */
+    .projects-container h1, 
+    .team-page-container h1, 
+    .course-header h1 {
+      font-size: 28px !important; /* Force override */
+      margin-bottom: 30px;
+      word-wrap: break-word; /* Prevent overflow */
+    }
+
+    .projects-container h1::after, 
+    .team-page-container h1::after, 
+    .course-header h1::after {
+      bottom: -10px;
+      width: 40px; /* Smaller neon bar */
+    }
+
+    /* 4. CARDS GRID */
+    .cards, .team-cards {
+      grid-template-columns: 1fr; /* 1 card per row on phone */
+      gap: 30px;
+      padding: 0;
+    }
+
+    .card, .team-card {
+      max-width: 100%; /* Full width */
+    }
+
+    /* 5. FORMS & CONTAINERS */
+    .form-container {
+      padding: 30px 20px; /* Smaller internal padding */
+      width: 100%;
+      border-radius: 16px;
+    }
+
+    .form-container h1 {
+      font-size: 24px;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    button {
+      font-size: 16px; /* Prevents iOS zooming on focus */
+      padding: 12px 15px;
+    }
+
+    /* 6. MODALS */
+    .modal-container {
+      padding: 30px 20px;
+      width: 95%;
+    }
+
+    .modal-actions {
+      flex-direction: column; /* Stack buttons */
+      gap: 10px;
+    }
+    
+    .btn-primary-glow, .btn-ghost {
+      width: 100%;
+    }
+
+    /* 7. COURSE / PDF PAGE */
+    .course-page {
+      width: 100%;
+      padding: 30px 15px;
+      margin: 20px 0;
+    }
+    
+    .course-header h1 {
+      font-size: 26px;
+    }
+    
+    .pdf-viewer {
+      height: 400px; /* Smaller PDF viewer on mobile */
+    }
+  }
+
+  /* Specific fix for very small screens (iPhone SE, Fold) */
+  @media (max-width: 380px) {
+    nav ul {
+      gap: 8px;
+    }
+    nav a {
+      font-size: 11px;
+      padding: 4px 6px;
+    }
+  }
+
+
+  /* ========================================= */
+  /* 🍔 --- MENU MOBILE (HAMBURGER) --- */
+  /* ========================================= */
+
+  /* PC : On cache le bouton hamburger */
+  .hamburger {
+    display: none;
+  }
+
+  /* MOBILE : Configuration */
+  @media (max-width: 768px) {
+
+    /* 1. Réglage du Header sur mobile */
+    header {
+      padding: 15px 20px;
+      /* On garde le logo à gauche et le bouton à droite */
+      flex-direction: row; 
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 2. Afficher et styliser le bouton Hamburger */
+  /* 2. Afficher et positionner le bouton Hamburger à droite */
+    .hamburger {
+      display: block;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      
+      /* --- POSITION ABSOLUE POUR FORCER LA DROITE --- */
+      position: absolute;
+      right: 20px;      /* Collé à droite (match le padding du header) */
+      top: 5px;         /* Centré verticalement */
+      transform: translateY(-50%); /* Ajustement précis du centrage */
+    }
+
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 3px;
+      background-color: var(--primary);
+      margin: 6px 0;
+      border-radius: 3px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* 3. Le Menu (Caché par défaut) */
+    /* ========================================= */
+    /* 🚀 --- 3. MENU MOBILE PREMIUM (UPDATE) --- */
+    /* ========================================= */
+
+    nav .nav-links {
+      position: fixed;
+      top: 45px;
+      left: 0;
+      width: 100%;
+      
+      /* FOND : Dégradé profond + Flou intense */
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.98) 0%, rgba(15, 22, 35, 1) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      
+      /* Bordure lumineuse subtile en bas */
+      border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+
+      padding: 40px 0 60px 0;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px; /* Plus d'espace entre les liens */
+      
+      /* Animation d'ouverture */
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Courbe fluide */
+    }
+
+    /* État OUVERT */
+    nav .nav-links.active {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    /* --- ANIMATION CASCADE (Les liens arrivent un par un) --- */
+    nav .nav-links li {
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    nav .nav-links.active li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Délais pour l'effet cascade */
+    nav .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+    nav .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
+    nav .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+    nav .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
+
+    /* --- STYLE DES LIENS (TYPOGRAPHIE) --- */
+    nav .nav-links a {
+      display: inline-block;
+      font-size: 22px;       /* Texte plus grand */
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 10px 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: transparent; /* Pas de fond gris */
+      position: relative;
+      transition: all 0.3s var(--ease-spring);
+    }
+
+    /* EFFET HOVER (Lueur Néon) */
+    nav .nav-links a:hover {
+      color: white;
+      text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+      transform: scale(1.1);
+    }
+
+    /* Ligne qui s'étend sous le texte */
+    nav .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0%;
+      height: 2px;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    nav .nav-links a:hover::after {
+      width: 50%;
+    }
+
+    /* 4. Animation du Hamburger en Croix (X) */
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+  }
+
+
+
+  /* ========================================= */
+  /* 🚑 --- CORRECTIF HAMBURGER --- */
+  /* ========================================= */
+
+  /* On force le bouton hamburger à ignorer le style global des boutons */
+  button.hamburger {
+      width: auto !important;        /* Ne pas prendre 100% de largeur */
+      max-width: none !important;    /* Enlever la limite de 380px */
+      background: transparent !important; /* Fond transparent */
+      border: none !important;       /* Pas de bordure */
+      box-shadow: none !important;   /* Pas d'ombre de boîte */
+      padding: 10px !important;      /* Padding réduit */
+      margin: 0 !important;          /* Pas de marge bizarre */
+      transform: none !important;    /* Pas d'effet de déplacement */
+  }
+
+  /* Supprimer l'effet de brillance (shine) du bouton global */
+  button.hamburger::after {
+      display: none !important;
+  }
+
+  /* Style au survol (simple lueur sur les barres, pas le fond) */
+  button.hamburger:hover {
+      background: transparent !important;
+      transform: scale(1.1) !important; /* Petit effet de zoom sympa */
+  }
+
+  /* S'assurer que les barres sont bien visibles */
+  .hamburger span {
+      background-color: var(--primary) !important;
+      box-shadow: 0 0 8px var(--primary-glow); /* Garde le néon sur les lignes */
+  }

@@ -1,0 +1,87 @@
+  {% load static %}
+  <!-- ⚫ FOOTER -->
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- 1. VERIFICATION IMMEDIATE ---
+        // Si l'utilisateur a déjà envoyé des données, on arrête tout le script ici.
+        if (localStorage.getItem('userHasContributed') === 'true') {
+            return; 
+        }
+
+        const modal = document.getElementById('contributeModal');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const HOURS_BEFORE_RESHOW = 24; 
+        
+        // --- LOGIQUE TEMPORELLE (inchangée) ---
+        const lastClosedTime = localStorage.getItem('contributeModalClosedTime');
+        const now = new Date().getTime();
+        let shouldShow = true;
+        
+        if (lastClosedTime) {
+            const timePassed = now - parseInt(lastClosedTime);
+            const waitTimeInMs = HOURS_BEFORE_RESHOW * 60 * 60 * 1000;
+            if (timePassed < waitTimeInMs) {
+                shouldShow = false;
+            }
+        }
+
+        if (shouldShow) {
+            setTimeout(() => {
+                if(modal) modal.classList.add('active');
+            }, 1500);
+        }
+
+        // --- ACTIONS ---
+        if(closeBtn) {
+            closeBtn.addEventListener('click', closeAndSave);
+        }
+        if(modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeAndSave();
+            });
+        }
+
+        function closeAndSave() {
+            modal.classList.remove('active');
+            localStorage.setItem('contributeModalClosedTime', new Date().getTime().toString());
+        }
+    });
+
+
+
+
+
+
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+      
+      // Ferme le menu quand on clique sur un lien
+      document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          navLinks.classList.remove("active");
+        });
+      });
+    }
+  });
+
+</script>
+  
+  
+  <footer>
+    <p>© 2025 BrainyAI — Tous droits réservés.</p>
+  </footer>
+
+</body>
+</html>
